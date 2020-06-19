@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_qr_reader/flutter_qr_reader.dart';
-import 'package:flutter_qr_reader_example/scanViewDemo.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -71,22 +70,6 @@ class _HomePageState extends State<HomePage> {
               child: Text("请求权限"),
               color: Colors.blue,
             ),
-            FlatButton(
-              onPressed: () async {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ScanViewDemo()));
-              },
-              child: Text("独立UI"),
-            ),
-            FlatButton(
-                onPressed: () async {
-                  var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-                  if (image == null) return;
-                  final rest = await FlutterQrReader.imgScan(image);
-                  setState(() {
-                    data = rest;
-                  });
-                },
-                child: Text("识别图片")),
             FlatButton(
                 onPressed: () {
                   assert(_controller != null);

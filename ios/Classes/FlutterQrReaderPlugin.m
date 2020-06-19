@@ -15,26 +15,7 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-    if ([@"imgQrCode" isEqualToString:call.method]) {
-        [self scanQRCode:call result:result];
-    } else {
-        result(FlutterMethodNotImplemented);
-    }
-}
-
-- (void)scanQRCode:(FlutterMethodCall*)call result:(FlutterResult)result{
-    NSString *path = call.arguments[@"file"];
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
-    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
-    
-    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
-    if (features.count > 0) {
-        CIQRCodeFeature *feature = [features objectAtIndex:0];
-        NSString *qrData = feature.messageString;
-        result(qrData);
-    } else {
-        result(NULL);
-    }
+    result(FlutterMethodNotImplemented);
 }
 
 @end
